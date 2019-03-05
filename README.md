@@ -1,4 +1,4 @@
-# Running SLURM on ubuntu 16 or 18
+# Installing & Running SLURM on ubuntu 16 or 18
 
 ```
 sudo apt install slurm-wlm
