@@ -1,0 +1,3 @@
+Bootstrap: debootstrap
+OSVersion: trusty
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
