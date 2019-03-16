@@ -1,0 +1,30 @@
+  DEF FILE BASE OS:
+
+      Library:
+          Bootstrap: library
+          From: debian:9
+
+      Docker:
+          Bootstrap: docker
+          From: tensorflow/tensorflow:latest
+          IncludeCmd: yes # Use the CMD as runscript instead of ENTRYPOINT
+
+      Singularity Hub:
+          Bootstrap: shub
+          From: singularityhub/centos
+
+      YUM/RHEL:
+          Bootstrap: yum
+          OSVersion: 7
+          MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/x86_64/
+          Include: yum
+
+      Debian/Ubuntu:
+          Bootstrap: debootstrap
+          OSVersion: trusty
+          MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+      Local Image:
+          Bootstrap: localimage
+          From: /home/dave/starter.img
+
