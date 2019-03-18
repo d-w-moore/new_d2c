@@ -11,7 +11,7 @@ mkdir -p $SLURM_HOOK_DIR
 echo > $SLURM_HOOK_DIR/irods_unified.sh "#!/bin/bash
 IRODS_COMPUTE_DIR='$IRODS_SLURM_DIR'
 BASE_NAME=\$(basename \$0)
-exec su - irods -c \"\${IRODS_COMPUTE_DIR}/\${BASE_NAME}_script\""
+exec su irods -c \"\${IRODS_COMPUTE_DIR}/\${BASE_NAME}_script\""
 
 chmod +x $SLURM_HOOK_DIR/irods_unified.sh
 ln -sf irods_unified.sh $SLURM_HOOK_DIR/irods_prolog
@@ -23,3 +23,7 @@ grep -Ei '^(\s|#)*(Epilog|Prolog)=' $SLURM_CONF_FILE >/dev/null || {
   echo "Epilog=$SLURM_HOOK_DIR/irods_epilog"
   }  >> $SLURM_CONF_FILE
 
+
+# --------------------
+# make directory  ${IRODS_SLURM_DIR}
+# populate with irods_{pro,epi}log_script
