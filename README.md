@@ -10,24 +10,24 @@ sudo systemctl restart slurmctld slurmd
 sudo systemctl enable  slurmctld slurmd
 ```
 
-## Data/Compute automated setup
+to test:
+   - sudo apt install bc
+   - locate command file slurm_install_test.sh containing:
+   ```
+     #!/bin/bash
+     bc -l <<<"scale=4000;a(1)*4"
+  ```
+   - run the above mentioned test script using : `sbatch <script>`
+   - type: `squeue` and note the job present (most likely running)
+   - when it disappears from queue (`watch -n1 squeue`), look for `slurm-<JOBNUM>.out`
+     containing the job's output
 
-Change current directory to this repo and
+## Data/Compute automated setup - install iRODS hook scripts for slurm prolog / epilog
+
+The following command will setup prolog and epilog scripts to be run (pre- and post-, 
+respectively) for each job executed by SLURM:
 
 ```
 sudo ./slurm_hook_setup.sh
 ```
 
-to test:
-   - sudo apt install bc
-   - create batch command file to be run
-   - locate test file (`slurm_pre_post_test.sh`)
-   ```
-     #!/bin/bash
-     bc -l <<<"scale=4000;a(1)*4"
-  ```
-   - type: `sbatch ./a.sh`
-   - type: `squeue` and note the job present (most likely running)
-   - when it disapperas from queue, look in /tmp for logs produced by prolog / epilog scripts
-
-  irods prolog and epilog scripts will create logs in `/tmp` before/after the job is executed

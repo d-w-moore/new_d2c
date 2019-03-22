@@ -23,7 +23,10 @@ grep -Ei '^(\s|#)*(Epilog|Prolog)=' $SLURM_CONF_FILE >/dev/null || {
   echo "Epilog=$SLURM_HOOK_DIR/irods_epilog"
   }  >> $SLURM_CONF_FILE
 
-
-# --------------------
-# make directory  ${IRODS_SLURM_DIR}
-# populate with irods_{pro,epi}log_script
+sudo mkdir -p "${IRODS_SLURM_DIR}"
+sudo chown irods.irods "${IRODS_SLURM_DIR}"
+for script in "${IRODS_SLURM_DIR}"/irods_{pro,epi}log_script
+do
+    sudo su irods -c "touch '$script' ; chmod 775 '$script'"
+done
+sudo systemctl restart slurmctld slurmd #--> to enable irods prolog/epilog
