@@ -8,12 +8,10 @@ SLURM_CONF_FILE=/etc/slurm-llnl/slurm.conf
 
 mkdir -p $SLURM_HOOK_DIR
 
-echo > $SLURM_HOOK_DIR/irods_unified.sh "#!/bin/bash
-IRODS_COMPUTE_DIR='$IRODS_SLURM_DIR'
-BASE_NAME=\$(basename \$0)
-exec su irods -c \"\${IRODS_COMPUTE_DIR}/\${BASE_NAME}_script\""
+cp "$(dirname $0)"/irods_unified.sh $SLURM_HOOK_DIR/.
+chown root.root $SLURM_HOOK_DIR/irods_unified.sh
+chmod 755 $SLURM_HOOK_DIR/irods_unified.sh
 
-chmod +x $SLURM_HOOK_DIR/irods_unified.sh
 ln -sf irods_unified.sh $SLURM_HOOK_DIR/irods_prolog
 ln -sf irods_unified.sh $SLURM_HOOK_DIR/irods_epilog
 
