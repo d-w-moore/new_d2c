@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+from __future__ import print_function
 import json
 
 class myClass (object):
@@ -27,10 +29,9 @@ def json_decode (dct, memo=[]):
 
 #----
 
-dc=json.dumps( [{'b':3},3+3j,myClass(100),-2j,myClass(100)],cls=myenc)
-print('----\n'+ str(dc) + '\n----\n')
-
-#----
-x = json.loads(dc, object_hook = json_decode)
-print(repr(x))
-print (x[2], x[4], (x[2] is x[4]) )
+if __name__ == '__main__':
+    dc=json.dumps( [{'b':3},3+3j,myClass(100),-2j,myClass(100)],cls=myenc)
+    print('----\n'+ str(dc) + '\n----\n')
+    x = json.loads(dc, object_hook = json_decode)
+    print(repr(x))
+    print (x[2], x[4], (x[2] is x[4]) )
