@@ -5,6 +5,7 @@
 ```
 sudo apt install slurm-wlm
 git clone http://github.com/d-w-moore/new_d2c
+cd new_d2c
 perl process_slurm_template.pl  | sudo dd of=/etc/slurm-llnl/slurm.conf
 sudo systemctl restart slurmctld slurmd
 sudo systemctl enable  slurmctld slurmd
